@@ -13,9 +13,35 @@ scalar DateTime
         createdAt: DateTime
     }
 
+    input TurmaInput {
+        descricao: String,
+        horario: String,
+        vagas: Int,
+        inicio: DateTime,
+        docente_id: Int,
+        createdAt: DateTime
+    }
+
+    interface Response {
+        mensagem: String!
+    }
+
+    type defaultResponse implements Response {
+        mensagem: String!
+    }
+
+
     type Query {
         turmas: [Turma]
         turma (id: ID!): Turma!
+    }
+
+ 
+    type Mutation {
+        addTurma(turma: TurmaInput): Turma!
+        updateTurma(id: ID!, turma: TurmaInput): Turma
+        turma(id: ID!): Turma!
+        deleteTurma(id: ID!): defaultResponse!
     }
 
 `
